@@ -1,0 +1,14 @@
+# Chain through 3+ layers simultaneously
+class MultiHopRotator:
+    def __init__(self):
+        self.layers = [
+            "socks5://127.0.0.1:9050",  # Tor
+            "http://rotating-proxy1:8080",
+            "http://rotating-proxy2:8080"
+        ]
+    
+    async def request(self, url):
+        # Chain all layers - IP changes every request
+        proxy_chain = self.layers[0]  # Tor outermost
+        # aiohttp supports only single proxy, use system-level chaining
+        pass
